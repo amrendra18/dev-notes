@@ -1,0 +1,13 @@
+#Git branch in prompt.
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+get_path(){
+	echo $(pwd)
+}
+BOLD="\[\e[1m\]"
+EBOLD="\[\e[0m\]"
+TCOLOR="\[\033[33m\]"
+BCOLOR="\[\033[41m\]"
+RCOLOR="\[\033[00m\]"
+export PS1="\n$BOLD$BCOLOR$TCOLOR\$(get_path)$RCOLOR$EBOLD\n$BOLD$TCOLOR\$(parse_git_branch)$EBOLD$RCOLOR $ "
